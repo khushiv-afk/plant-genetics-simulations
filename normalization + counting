@@ -1,0 +1,29 @@
+def normalize_genotype(genotype):
+    return ''.join(sorted(genotype, reverse=True))
+
+
+def punnett_square(parent1, parent2):
+    results = []
+
+    for allele1 in parent1:
+        for allele2 in parent2:
+            genotype = allele1 + allele2
+            genotype = normalize_genotype(genotype)
+            results.append(genotype)
+
+    return results
+
+
+parent1 = "Aa"
+parent2 = "Aa"
+
+offspring = punnett_square(parent1, parent2)
+
+counts = {}
+
+for child in offspring:
+    counts[child] = counts.get(child, 0) + 1
+
+print("Genotype counts:")
+for genotype, count in counts.items():
+    print(genotype, ":", count)
