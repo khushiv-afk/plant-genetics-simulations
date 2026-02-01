@@ -1,0 +1,43 @@
+def normalize_genotype(genotype):
+    return ''.join(sorted(genotype, reverse=True))
+
+
+def punnett_square(parent1, parent2):
+    results = []
+
+    for allele1 in parent1:
+        for allele2 in parent2:
+            genotype = allele1 + allele2
+            genotype = normalize_genotype(genotype)
+            results.append(genotype)
+
+    return results
+
+
+parent1 = "Aa"
+parent2 = "Aa"
+
+offspring = punnett_square(parent1, parent2)
+
+# Count genotypes
+genotype_counts = {}
+for child in offspring:
+    genotype_counts[child] = genotype_counts.get(child, 0) + 1
+
+print("Genotype counts:")
+for genotype, count in genotype_counts.items():
+    print(genotype, ":", count)
+
+# Phenotype calculation
+dominant = 0
+recessive = 0
+
+for genotype in offspring:
+    if 'A' in genotype:
+        dominant += 1
+    else:
+        recessive += 1
+
+print("\nPhenotype counts:")
+print("Dominant:", dominant)
+print("Recessive:", recessive)
